@@ -32,15 +32,22 @@ export class AthenaStack extends cdk.Stack {
     const userData = ec2.UserData.forLinux()
     userData.addCommands(
       'yum update -y',
-      'yum install -y docker',
+      'yum install -y git docker',
+
+      'DOCKER_CONFIG=${DOCKER_CONFIG:-/usr/local/lib/docker}',
+      'mkdir -p $DOCKER_CONFIG/cli-plugins',
+      'curl -SL https://github.com/docker/compose/releases/download/v2.40.0/docker-compose-linux-aarch64 -o $DOCKER_CONFIG/cli-plugins/docker-compose',
+      'chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose',
+
       'service docker start',
-      'usermod -a -G docker ec2-user',
+
       'git clone https://github.com/abhithube/athena /opt/athena',
+
+      'docker network create athena',
       'cd /opt/athena/services/caddy && docker compose up -d',
       'cd /opt/athena/services/authelia && docker compose up -d',
       'cd /opt/athena/services/portainer && docker compose up -d',
       'cd /opt/athena/services/glance && docker compose up -d',
-      'cd /opt/athena/services/open-webui && docker compose up -d',
     )
 
     new ec2.LaunchTemplate(this, 'LaunchTemplate', {
