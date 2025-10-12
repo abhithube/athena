@@ -1,6 +1,6 @@
 services:
   caddy:
-    image: caddy:alpine
+    image: caddy
     container_name: caddy
     restart: unless-stopped
     networks:
@@ -12,6 +12,7 @@ services:
     volumes:
       - ./config:/etc/caddy
       - caddy_data:/data
+      - caddy_config:/config
 
 networks:
   athena:
@@ -19,3 +20,4 @@ networks:
 
 volumes:
   caddy_data:
+  caddy_config:
