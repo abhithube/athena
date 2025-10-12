@@ -1,0 +1,25 @@
+jwt_secret: secret
+
+default_redirection_url: https://dashboard.abhithube.com
+
+authentication_backend:
+  file:
+    path: /config/users.yml
+
+storage:
+  encryption_key: storage_encryption_key
+  local:
+    path: /config/db.sqlite3
+
+session:
+  domain: abhithube.com
+  secret: secret
+notifier:
+  filesystem:
+    filename: /config/notification.txt
+
+access_control:
+  default_policy: deny
+  rules:
+    - domain: "*.abhithube.com"
+      policy: one_factor

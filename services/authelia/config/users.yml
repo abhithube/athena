@@ -1,0 +1,6 @@
+users:
+  abhithube:
+    disabled: false
+    email: athube@abhithube.com
+    password: $argon2id$v=19$m=65536,t=3,p=4$6iMA+cbGY5hVHtKd9Zh5DQ$Z5eZdJrnybTnVEytkOTStOeDNooRgZfmXicjTQkTbOo
+    displayname: Abhi Thube

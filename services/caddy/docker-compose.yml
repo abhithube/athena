@@ -1,0 +1,21 @@
+services:
+  caddy:
+    image: caddy:alpine
+    container_name: caddy
+    restart: unless-stopped
+    networks:
+      - athena
+    ports:
+      - 80:80
+      - 443:443
+      - 443:443/udp
+    volumes:
+      - ./config:/etc/caddy
+      - caddy_data:/data
+
+networks:
+  athena:
+    external: true 
+
+volumes:
+  caddy_data:

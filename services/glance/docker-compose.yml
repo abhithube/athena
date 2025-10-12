@@ -1,0 +1,16 @@
+services:
+  glance:
+    image: glanceapp/glance
+    container_name: glance
+    restart: unless-stopped
+    networks:
+      - self_hosted
+    ports:
+      - 10002:8080
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/app/config
+
+networks:
+  athena:
+    external: true

@@ -1,0 +1,15 @@
+services:
+  authelia:
+    image: authelia/authelia
+    container_name: authelia
+    restart: unless-stopped
+    networks:
+      - athena
+    ports:
+      - 10000:9091
+    volumes:
+      - ./config:/config
+
+networks:
+  athena:
+    external: true
