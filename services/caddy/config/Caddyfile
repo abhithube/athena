@@ -5,6 +5,10 @@
   }
 }
 
+abhithube.com {
+  redir https://dashboard.abhithube.com permanent
+}
+
 auth.abhithube.com {
 	reverse_proxy authelia:10000
 }
