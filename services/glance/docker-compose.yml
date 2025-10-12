@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     networks:
       - athena
-    ports:
-      - 10002:8080
+    # ports:
+    #   - 8080:8080
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./config:/app/config

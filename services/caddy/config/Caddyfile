@@ -1,5 +1,5 @@
 (handle_auth) {
-  forward_auth authelia:10000 {
+  forward_auth authelia:9091 {
     uri /api/verify?rd=https://auth.abhithube.com/
     copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
   }
@@ -10,11 +10,11 @@ abhithube.com {
 }
 
 auth.abhithube.com {
-	reverse_proxy authelia:10000
+	reverse_proxy authelia:9091
 }
 
 management.abhithube.com {
-	reverse_proxy portainer:10001 {
+	reverse_proxy portainer:9443 {
     transport http {
       tls
       tls_insecure_skip_verify
@@ -25,11 +25,11 @@ management.abhithube.com {
 dashboard.abhithube.com {
   import handle_auth
 
-	reverse_proxy glance:10002
+	reverse_proxy glance:8080
 }
 
 ai.abhithube.com {
   import handle_auth
 
-	reverse_proxy open-webui:10003
+	reverse_proxy open-webui:8080
 }
