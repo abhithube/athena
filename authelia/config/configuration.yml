@@ -9,8 +9,10 @@ access_control:
       policy: one_factor
 
 session:
-  domain: abhithube.com
-  default_redirection_url: https://dashboard.abhithube.com
+  cookies:
+    - domain: abhithube.com
+      authelia_url: https://auth.abhithube.com
+      default_redirection_url: https://dashboard.abhithube.com
 
 storage:
   local:
