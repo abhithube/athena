@@ -1,6 +1,8 @@
 services:
   caddy:
-    image: caddy
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: caddy
     restart: unless-stopped
     networks:
@@ -13,10 +15,12 @@ services:
       - ./config:/etc/caddy
       - caddy_data:/data
       - caddy_config:/config
+    env_file:
+      - .env
 
 networks:
   athena:
-    external: true 
+    external: true
 
 volumes:
   caddy_data:

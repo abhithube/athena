@@ -7,9 +7,8 @@ services:
       - athena
     volumes:
       - open-webui_data:/app/backend/data
-    environment:
-      - WEBUI_AUTH_TRUSTED_EMAIL_HEADER=Remote-Email
-      - WEBUI_AUTH_TRUSTED_NAME_HEADER=Remote-Name
+    env_file:
+      - .env
 
 networks:
   athena:

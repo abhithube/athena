@@ -1,7 +1,60 @@
-(handle_auth) {
-  forward_auth authelia:9091 {
-    uri /api/verify?rd=https://auth.abhithube.com/
-    copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+{
+  order authenticate before respond
+  order authorize before authenticate
+
+  security {
+    oauth identity provider generic {
+      realm generic
+      driver generic
+
+      client_id {$CLIENT_ID}
+      client_secret {$CLIENT_SECRET}
+      scopes openid email profile
+
+      base_auth_url https://auth.abhithube.com
+      metadata_url http://pocket-id:1411/.well-known/openid-configuration
+
+      delay_start 5
+      retry_attempts 3
+      retry_interval 10
+    }
+
+    authentication portal myportal {
+      crypto default token lifetime 3600
+
+			enable identity provider generic
+
+      cookie domain abhithube.com
+			cookie insecure off
+
+      transform user {
+        match origin generic
+
+        action add role user
+      }
+    }
+
+    authorization policy mypolicy {
+      set auth url /caddy-security/oauth2/generic
+
+      allow roles user
+
+      inject headers with claims
+    }
+  }
+}
+
+(sso_auth) {
+  @auth {
+    path /caddy-security/*
+  }
+
+  route @auth {
+    authenticate with myportal
+  }
+
+  route /* {
+    authorize with mypolicy
   }
 }
 
@@ -10,26 +63,28 @@ abhithube.com {
 }
 
 auth.abhithube.com {
-	reverse_proxy authelia:9091
+	reverse_proxy pocket-id:1411
 }
 
 management.abhithube.com {
+	import sso_auth
+
 	reverse_proxy portainer:9443 {
-    transport http {
-      tls
-      tls_insecure_skip_verify
-    }
-  }
+		transport http {
+			tls
+			tls_insecure_skip_verify
+		}
+	}
 }
 
 dashboard.abhithube.com {
-  import handle_auth
+	import sso_auth
 
 	reverse_proxy glance:8080
 }
 
 ai.abhithube.com {
-  import handle_auth
+	import sso_auth
 
 	reverse_proxy open-webui:8080
 }

@@ -1,6 +1,0 @@
-users:
-  user1:
-    disabled: false
-    email: user1@example.com
-    password: $argon2id$v=19$m=65536,t=3,p=4$6iMA+cbGY5hVHtKd9Zh5DQ$Z5eZdJrnybTnVEytkOTStOeDNooRgZfmXicjTQkTbOo
-    displayname: User 1

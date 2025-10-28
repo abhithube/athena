@@ -1,4 +1,0 @@
-/config/*
-!/config/configuration.yml
-!/config/users.example.yml
-!/config/secrets/.gitkeep
