@@ -63,6 +63,14 @@ abhithube.com {
 }
 
 auth.abhithube.com {
+	rate_limit {
+		zone auth_zone {
+			key {remote_host}
+			window 1m
+			events 100
+		}
+	}
+  
 	reverse_proxy pocket-id:1411
 }
 
