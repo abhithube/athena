@@ -1,8 +1,7 @@
 FROM caddy:builder AS builder
 
 RUN xcaddy build \
-    --with github.com/greenpau/caddy-security \
-    --with github.com/mholt/caddy-ratelimit
+    --with github.com/greenpau/caddy-security
 
 FROM caddy:latest
 
