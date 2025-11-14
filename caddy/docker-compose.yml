@@ -12,16 +12,12 @@ services:
       - 443:443
       - 443:443/udp
     volumes:
-      - ./config:/etc/caddy
-      - caddy_data:/data
-      - caddy_config:/config
+      - ./data:/data
+      - ./conf:/etc/caddy
+      - ./config:/config
     env_file:
       - .env
 
 networks:
   athena:
     external: true
-
-volumes:
-  caddy_data:
-  caddy_config:
