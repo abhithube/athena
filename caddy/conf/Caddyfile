@@ -71,19 +71,12 @@ auth.abhithube.com {
 	reverse_proxy pocket-id:1411
 }
 
-management.abhithube.com {
-	import sso_auth
-
-	reverse_proxy portainer:9443 {
-		transport http {
-			tls
-			tls_insecure_skip_verify
-		}
-	}
-}
-
 dashboard.abhithube.com {
 	import sso_auth
 
 	reverse_proxy glance:8080
+}
+
+status.abhithube.com {
+	reverse_proxy beszel:8090
 }
