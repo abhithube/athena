@@ -6,13 +6,16 @@ services:
     networks:
       - athena
     volumes:
-      - open-webui_data:/app/backend/data
+      - ./data:/app/backend/data
     env_file:
       - .env
+    environment:
+      WEBUI_URL: https://ai.abhithube.com
+      OAUTH_MERGE_ACCOUNTS_BY_EMAIL: true
+      OPENID_PROVIDER_URL: https://auth.abhithube.com/.well-known/openid-configuration
+      OAUTH_PROVIDER_NAME: "Pocket ID"
+      OPENID_REDIRECT_URI: https://ai.abhithube.com/oauth/oidc/callback
 
 networks:
   athena:
     external: true 
-
-volumes:
-  open-webui_data:

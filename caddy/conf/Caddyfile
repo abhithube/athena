@@ -9,7 +9,7 @@
 
       client_id {$CLIENT_ID}
       client_secret {$CLIENT_SECRET}
-      scopes openid email profile
+      scopes openid email profile offline_access
 
       base_auth_url https://auth.abhithube.com
       metadata_url http://pocket-id:1411/.well-known/openid-configuration
@@ -20,7 +20,8 @@
     }
 
     authentication portal myportal {
-      crypto default token lifetime 3600
+      crypto default token lifetime 900
+      cookie lifetime 604800
 
 			enable identity provider generic
 
@@ -62,6 +63,10 @@ abhithube.com {
   redir https://dashboard.abhithube.com permanent
 }
 
+ai.abhithube.com {
+	reverse_proxy open-webui:8080
+}
+
 auth.abhithube.com {  
 	reverse_proxy pocket-id:1411
 }
@@ -81,10 +86,4 @@ dashboard.abhithube.com {
 	import sso_auth
 
 	reverse_proxy glance:8080
-}
-
-ai.abhithube.com {
-	import sso_auth
-
-	reverse_proxy open-webui:8080
 }
