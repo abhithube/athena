@@ -1,0 +1,13 @@
+services:
+  memos:
+    image: neosmemo/memos
+    container_name: memos
+    restart: unless-stopped
+    networks:
+      - athena
+    volumes:
+      - ./data:/var/opt/memos
+
+networks:
+  athena:
+    external: true 

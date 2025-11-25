@@ -77,6 +77,14 @@ dashboard.abhithube.com {
 	reverse_proxy glance:8080
 }
 
+notebook.abhithube.com {
+	reverse_proxy memos:5230
+}
+
+spreadsheet.abhithube.com {
+	reverse_proxy grist:8484
+}
+
 status.abhithube.com {
 	reverse_proxy beszel:8090
 }
