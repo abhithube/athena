@@ -6,13 +6,10 @@ services:
     networks:
       - athena
     volumes:
-      - pocket-id_data:/app/data
+      - ./data:/app/data
     environment:
       - APP_URL=https://auth.abhithube.com
 
 networks:
   athena:
     external: true 
-
-volumes:
-  pocket-id_data:
