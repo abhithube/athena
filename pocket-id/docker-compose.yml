@@ -6,7 +6,7 @@ services:
     networks:
       - athena
     volumes:
-      - ./data:/app/data
+      - /opt/athena/pocket-id:/app/data
     environment:
       - APP_URL=https://auth.abhithube.com
 

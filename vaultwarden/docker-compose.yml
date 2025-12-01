@@ -6,7 +6,7 @@ services:
     networks:
       - athena
     volumes:
-      - ./data:/data/
+      - /opt/athena/vaultwarden:/data
     environment:
       DOMAIN: https://vault.abhithube.com
       SIGNUPS_ALLOWED: false

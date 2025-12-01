@@ -6,7 +6,7 @@ services:
     networks:
       - athena
     volumes:
-      - ./data:/app/backend/data
+      - /opt/athena/open-webui:/app/backend/data
     env_file:
       - .env
     environment:

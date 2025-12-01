@@ -6,7 +6,7 @@ services:
     networks:
       - athena
     volumes:
-      - ./data:/var/opt/memos
+      - /opt/athena/memos:/var/opt/memos
 
 networks:
   athena:

@@ -1,0 +1,4 @@
+services:
+  watchtower:
+    image: restic/restic
+    container_name: restic

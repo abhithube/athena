@@ -6,7 +6,7 @@ services:
     networks:
       - athena
     volumes:
-      - ./data:/persist
+      - /opt/athena/grist:/persist
     env_file:
       - .env
     environment:
